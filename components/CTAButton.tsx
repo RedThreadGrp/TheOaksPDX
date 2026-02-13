@@ -19,12 +19,12 @@ export default function CTAButton({
   onClick,
   eventName,
 }: CTAButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center px-8 py-3 rounded-lg font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 text-base md:text-lg';
+  const baseStyles = 'inline-flex items-center justify-center rounded-md font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
   
   const variantStyles = {
-    primary: 'bg-deep-green text-white hover:bg-primary-700 focus:ring-deep-green shadow-md hover:shadow-lg',
-    secondary: 'bg-oak-brown text-white hover:bg-warm-charcoal focus:ring-oak-brown shadow-md hover:shadow-lg',
-    outline: 'border-2 border-white text-white hover:bg-white hover:text-oak-brown focus:ring-white backdrop-blur-sm',
+    primary: 'bg-[#1f5f3a] text-[#f5f2ec] hover:bg-[#267348] focus:ring-deep-green shadow-lg tracking-wide px-10 py-4 text-lg',
+    secondary: 'bg-oak-brown text-[#f5f2ec] hover:bg-warm-charcoal focus:ring-oak-brown shadow-md hover:shadow-lg px-8 py-3 text-base md:text-lg',
+    outline: 'border-2 border-[#f5f2ec] text-[#f5f2ec] hover:bg-[#f5f2ec] hover:text-oak-brown focus:ring-[#f5f2ec] backdrop-blur-sm px-8 py-3 text-base md:text-lg',
   };
 
   const handleClick = () => {

@@ -24,7 +24,7 @@ export default function Navbar({ siteConfig }: NavbarProps) {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="text-xl font-bold text-white hover:text-gold transition-colors">
+          <Link href="/" className="text-xl font-bold text-[#f5f2ec] hover:text-[#b08a42] transition-colors">
             {siteConfig.businessName}
           </Link>
 
@@ -34,7 +34,7 @@ export default function Navbar({ siteConfig }: NavbarProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-cream hover:text-gold font-medium transition-colors"
+                className="text-[#f5f2ec] hover:text-[#b08a42] font-medium transition-colors"
               >
                 {link.label}
               </Link>
@@ -44,7 +44,7 @@ export default function Navbar({ siteConfig }: NavbarProps) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-white hover:text-gold transition-colors"
+            className="md:hidden p-2 text-[#f5f2ec] hover:text-[#b08a42] transition-colors"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
@@ -66,7 +66,7 @@ export default function Navbar({ siteConfig }: NavbarProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="block py-2 text-cream hover:text-gold font-medium transition-colors"
+                className="block py-2 text-[#f5f2ec] hover:text-[#b08a42] font-medium transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.label}
