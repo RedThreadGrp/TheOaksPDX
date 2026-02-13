@@ -114,10 +114,10 @@ function menuToCSVRows(menu: Menu, type: string): CSVRow[] {
         Description: item.description || '',
         Price: item.price || '',
         Dietary: dietaryString,
-        Spicy: item.spicy ? 'true' : 'false',
+        Spicy: item.spicy ? 'true' : '', // Empty if not spicy or undefined
         AddOns: addOnsString,
-        Active: 'true',
-        Featured: 'false',
+        Active: 'true', // Default for sheets - can be edited there
+        Featured: 'false', // Default for sheets - can be edited there
         Order: orderCounter++
       });
     }
