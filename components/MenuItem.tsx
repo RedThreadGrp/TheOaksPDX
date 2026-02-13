@@ -14,10 +14,10 @@ const dietaryIcons = {
 
 export default function MenuItem({ item }: MenuItemProps) {
   return (
-    <div className="flex justify-between items-start gap-4 print-break-inside-avoid">
+    <div className="flex justify-between items-start gap-6 print-break-inside-avoid py-4 border-b border-gray-200 last:border-0">
       <div className="flex-1">
-        <div className="flex items-center gap-2 mb-1">
-          <h3 className="font-semibold text-gray-900">
+        <div className="flex items-center gap-3 mb-2">
+          <h3 className="text-xl font-bold text-oak-brown">
             {item.name}
             {item.spicy && (
               <span className="ml-2 text-red-500" title="Spicy">
@@ -30,7 +30,7 @@ export default function MenuItem({ item }: MenuItemProps) {
               {item.dietary.map((diet) => (
                 <span
                   key={diet}
-                  className="text-xs"
+                  className="text-sm"
                   title={dietaryIcons[diet].label}
                 >
                   {dietaryIcons[diet].icon}
@@ -40,10 +40,10 @@ export default function MenuItem({ item }: MenuItemProps) {
           )}
         </div>
         {item.description && (
-          <p className="text-sm text-gray-600 mb-2">{item.description}</p>
+          <p className="text-base text-gray-600 leading-relaxed mb-2">{item.description}</p>
         )}
         {item.addOns && item.addOns.length > 0 && (
-          <div className="text-xs text-gray-500 mt-2">
+          <div className="text-sm text-gray-500 mt-3 pl-4 border-l-2 border-gold/30">
             <span className="font-medium">Add-ons: </span>
             {item.addOns.map((addOn, idx) => (
               <span key={idx}>
@@ -55,7 +55,7 @@ export default function MenuItem({ item }: MenuItemProps) {
         )}
       </div>
       {item.price && (
-        <div className="font-semibold text-gray-900 whitespace-nowrap">
+        <div className="text-xl font-bold text-gold whitespace-nowrap">
           {item.price}
         </div>
       )}

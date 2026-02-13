@@ -22,24 +22,24 @@ export default function Footer({ siteConfig }: FooterProps) {
   ];
 
   return (
-    <footer className="bg-gray-900 text-gray-300 no-print">
+    <footer className="bg-warm-charcoal text-cream/80 no-print">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Contact Info */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-4">{siteConfig.businessName}</h3>
+            <h3 className="text-cream font-bold text-lg mb-4">{siteConfig.businessName}</h3>
             <div className="space-y-2">
               <p>
                 {address.street}<br />
                 {address.city}, {address.state} {address.zip}
               </p>
               <p>
-                <a href={`tel:${phone}`} className="hover:text-white transition-colors">
+                <a href={`tel:${phone}`} className="hover:text-gold transition-colors">
                   {phone}
                 </a>
               </p>
               <p>
-                <a href={`mailto:${email}`} className="hover:text-white transition-colors">
+                <a href={`mailto:${email}`} className="hover:text-gold transition-colors">
                   {email}
                 </a>
               </p>
@@ -52,7 +52,7 @@ export default function Footer({ siteConfig }: FooterProps) {
                     href={siteConfig.instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white transition-colors"
+                    className="hover:text-gold transition-colors"
                     aria-label="Instagram"
                   >
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -65,7 +65,7 @@ export default function Footer({ siteConfig }: FooterProps) {
                     href={siteConfig.facebookUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white transition-colors"
+                    className="hover:text-gold transition-colors"
                     aria-label="Facebook"
                   >
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -79,7 +79,7 @@ export default function Footer({ siteConfig }: FooterProps) {
 
           {/* Hours */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-4">Hours</h3>
+            <h3 className="text-cream font-bold text-lg mb-4">Hours</h3>
             <div className="space-y-1">
               {Object.entries(hours).map(([day, dayHours]) => (
                 <div key={day} className="flex justify-between">
@@ -92,13 +92,13 @@ export default function Footer({ siteConfig }: FooterProps) {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-bold text-lg mb-4">Quick Links</h3>
+            <h3 className="text-cream font-bold text-lg mb-4">Quick Links</h3>
             <div className="space-y-2">
               {quickLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="block hover:text-white transition-colors"
+                  className="block hover:text-gold transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -107,7 +107,7 @@ export default function Footer({ siteConfig }: FooterProps) {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
+        <div className="border-t border-gold/20 mt-8 pt-8 text-center text-sm">
           <p>&copy; {currentYear} {siteConfig.businessName}. All rights reserved.</p>
         </div>
       </div>

@@ -37,10 +37,10 @@ export default function DrinksPageClient({ menu }: DrinksPageClientProps) {
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Drinks Menu</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-oak-brown mb-4">Drinks Menu</h1>
           <p className="text-lg text-gray-600">
             Our drinks menu is being updated. Please call us at{' '}
-            <a href="tel:503-232-1728" className="text-primary-600 hover:text-primary-700">
+            <a href="tel:503-232-1728" className="text-deep-green hover:text-oak-brown">
               503-232-1728
             </a>{' '}
             for current offerings.
@@ -51,59 +51,66 @@ export default function DrinksPageClient({ menu }: DrinksPageClientProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 pb-24 md:pb-8">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Drinks Menu</h1>
-          {menu.lastUpdatedISO && (
-            <p className="text-sm text-gray-500">
-              Last updated: {new Date(menu.lastUpdatedISO).toLocaleDateString()}
-            </p>
-          )}
-        </div>
-
-        {/* Dietary Filters */}
-        <div className="mb-8 no-print">
-          <div className="flex flex-wrap gap-2 justify-center">
-            {dietaryFilters.map((filter) => (
-              <button
-                key={filter.id}
-                onClick={() => handleFilterClick(filter.id)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  selectedFilter === filter.id
-                    ? 'bg-primary-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                <span className="mr-1">{filter.icon}</span>
-                {filter.label}
-              </button>
-            ))}
+    <div className="min-h-screen bg-cream">
+      <div className="bg-oak-brown text-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="text-5xl mb-4">🍸</div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Drinks Menu</h1>
+            <p className="text-xl text-cream/90 mb-2">Craft Cocktails. Local Beer. Great Wine.</p>
+            {menu.lastUpdatedISO && (
+              <p className="text-cream/70 text-sm">
+                Last updated: {new Date(menu.lastUpdatedISO).toLocaleDateString()}
+              </p>
+            )}
           </div>
-          {selectedFilter && (
-            <div className="text-center mt-4">
-              <button
-                onClick={() => setSelectedFilter(null)}
-                className="text-sm text-primary-600 hover:text-primary-700"
-              >
-                Clear filter
-              </button>
-            </div>
-          )}
         </div>
+      </div>
 
-        {/* Menu Sections */}
-        <div>
-          {filteredSections.length > 0 ? (
-            filteredSections.map((section) => (
-              <MenuSection key={section.id} section={section} />
-            ))
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-600">No items match your dietary preferences.</p>
+      <div className="container mx-auto px-4 py-12 pb-24 md:pb-12">
+        <div className="max-w-4xl mx-auto">
+          {/* Dietary Filters */}
+          <div className="mb-12 no-print sticky top-16 bg-cream py-4 z-10 border-b border-gold/30">
+            <div className="flex flex-wrap gap-3 justify-center">
+              {dietaryFilters.map((filter) => (
+                <button
+                  key={filter.id}
+                  onClick={() => handleFilterClick(filter.id)}
+                  className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                    selectedFilter === filter.id
+                      ? 'bg-deep-green text-white shadow-md'
+                      : 'bg-white text-oak-brown hover:bg-oak-brown hover:text-white shadow-sm'
+                  }`}
+                >
+                  <span className="mr-2">{filter.icon}</span>
+                  {filter.label}
+                </button>
+              ))}
             </div>
-          )}
+            {selectedFilter && (
+              <div className="text-center mt-4">
+                <button
+                  onClick={() => setSelectedFilter(null)}
+                  className="text-sm text-deep-green hover:text-oak-brown font-semibold"
+                >
+                  Clear filter
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Menu Sections */}
+          <div>
+            {filteredSections.length > 0 ? (
+              filteredSections.map((section) => (
+                <MenuSection key={section.id} section={section} />
+              ))
+            ) : (
+              <div className="text-center py-16">
+                <p className="text-lg text-gray-600">No items match your dietary preferences.</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
