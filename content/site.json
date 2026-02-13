@@ -1,0 +1,41 @@
+{
+  "businessName": "The Oaks Pub PDX",
+  "legalName": "The Oaks Pub PDX",
+  "tagline": "Your neighborhood pub in Southeast Portland",
+  "description": "A welcoming neighborhood pub serving great food, craft drinks, and good times in the heart of Sellwood-Moreland.",
+  "address": {
+    "street": "1621 SE Bybee Blvd",
+    "city": "Portland",
+    "state": "OR",
+    "zip": "97202",
+    "country": "US"
+  },
+  "phone": "503-232-1728",
+  "email": "info@theoakspubpdx.com",
+  "hours": {
+    "sunday": { "open": "11:00", "close": "21:00" },
+    "monday": { "open": "11:00", "close": "21:00" },
+    "tuesday": { "open": "11:00", "close": "21:00" },
+    "wednesday": { "open": "11:00", "close": "21:00" },
+    "thursday": { "open": "11:00", "close": "21:00" },
+    "friday": { "open": "11:00", "close": "22:00" },
+    "saturday": { "open": "11:00", "close": "22:00" }
+  },
+  "orderUrl": null,
+  "instagramUrl": null,
+  "facebookUrl": null,
+  "googleMapsUrl": null,
+  "googlePlaceId": null,
+  "cuisines": ["American", "Pub Food"],
+  "priceRange": "$$",
+  "latitude": null,
+  "longitude": null,
+  "features": [
+    "Full Bar",
+    "Craft Beer",
+    "Happy Hour",
+    "Outdoor Seating",
+    "TVs for Sports"
+  ],
+  "deliveryPlatforms": []
+}
