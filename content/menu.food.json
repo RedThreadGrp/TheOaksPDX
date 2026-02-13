@@ -1,5 +1,47 @@
 {
   "lastUpdatedISO": "2026-02-13T00:00:00.000Z",
   "showSampleMenu": false,
-  "sections": []
+  "sections": [
+    {
+      "id": "appetizers",
+      "title": "Appetizers",
+      "description": "Start your meal right",
+      "items": [
+        {
+          "name": "The Totchos",
+          "description": "Tater tots loaded with cheese, bacon, sour cream, and green onions",
+          "price": "$12"
+        }
+      ]
+    },
+    {
+      "id": "burgers-sandwiches",
+      "title": "Burgers & Sandwiches",
+      "description": "All burgers and sandwiches served with fries",
+      "items": [
+        {
+          "name": "The Burger",
+          "description": "Classic pub burger with lettuce, tomato, onion, and pickles",
+          "price": "$14"
+        },
+        {
+          "name": "The Reuben",
+          "description": "Corned beef, Swiss cheese, sauerkraut, and Thousand Island on rye",
+          "price": "$17"
+        }
+      ]
+    },
+    {
+      "id": "entrees",
+      "title": "Entrees",
+      "description": "Hearty pub favorites",
+      "items": [
+        {
+          "name": "Fish & Chips",
+          "description": "Beer-battered cod with fries and coleslaw",
+          "price": "$20"
+        }
+      ]
+    }
+  ]
 }
