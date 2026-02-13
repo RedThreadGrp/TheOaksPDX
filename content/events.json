@@ -1,0 +1,11 @@
+{
+  "recurringEvents": [],
+  "upcomingEvents": [],
+  "happyHour": null,
+  "privateParties": {
+    "enabled": true,
+    "description": "Looking to host a private event? We'd love to help make your gathering special. Contact us to discuss availability and options.",
+    "contactEmail": "info@theoakspubpdx.com",
+    "contactPhone": "503-232-1728"
+  }
+}
