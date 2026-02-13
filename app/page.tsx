@@ -40,7 +40,7 @@ export default function HomePage() {
             Neighborhood pub in Southeast Portland
           </p>
           
-          <div className="flex justify-center mb-8 mt-8">
+          <div className="flex justify-center mt-8 mb-8">
             <OpenNowBadge hours={siteConfig.hours} />
           </div>
           
@@ -213,7 +213,7 @@ export default function HomePage() {
               
               <Link 
                 href="/drinks" 
-                className="inline-block px-8 py-3 bg-gold text-oak-brown font-semibold rounded-lg hover:bg-[#f5f2ec] hover:text-oak-brown transition-colors"
+                className="inline-block px-8 py-3 bg-gold text-oak-brown font-semibold rounded-lg hover:bg-[#f5f2ec] transition-colors"
               >
                 VIEW DRINKS
               </Link>
