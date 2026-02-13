@@ -266,15 +266,12 @@ export default function HomePage() {
               Find Us
             </h2>
             
-            <div className="bg-gray-200 rounded-lg mb-8 overflow-hidden" style={{ height: '400px' }}>
-              <iframe
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                style={{ border: 0 }}
-                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(siteConfig.address.street + ', ' + siteConfig.address.city + ', ' + siteConfig.address.state)}`}
-                allowFullScreen
-              />
+            <div className="bg-gray-200 rounded-lg mb-8 overflow-hidden flex items-center justify-center" style={{ height: '400px' }}>
+              <div className="text-center p-8">
+                <div className="text-5xl mb-4">📍</div>
+                <p className="text-lg text-gray-700 mb-2">{siteConfig.address.street}</p>
+                <p className="text-lg text-gray-700">{siteConfig.address.city}, {siteConfig.address.state} {siteConfig.address.zip}</p>
+              </div>
             </div>
             
             <div className="text-center">
