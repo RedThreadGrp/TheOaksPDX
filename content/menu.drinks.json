@@ -1,5 +1,40 @@
 {
   "lastUpdatedISO": "2026-02-13T00:00:00.000Z",
   "showSampleMenu": false,
-  "sections": []
+  "sections": [
+    {
+      "id": "cocktails",
+      "title": "Cocktails",
+      "description": "Handcrafted cocktails made with premium spirits",
+      "items": [
+        {
+          "name": "The Oaks Fashioned",
+          "description": "Our take on the classic Old Fashioned with bourbon and house-made bitters",
+          "price": "$11"
+        },
+        {
+          "name": "The Bybee",
+          "description": "A refreshing blend of vodka, elderflower, and fresh citrus",
+          "price": "$12"
+        },
+        {
+          "name": "Oregon Mule",
+          "description": "Local vodka, ginger beer, and fresh lime",
+          "price": "$11"
+        }
+      ]
+    },
+    {
+      "id": "beer",
+      "title": "Craft Beer",
+      "description": "Rotating selection of local and regional craft beers",
+      "items": []
+    },
+    {
+      "id": "wine",
+      "title": "Wine",
+      "description": "Carefully curated wine selection",
+      "items": []
+    }
+  ]
 }
