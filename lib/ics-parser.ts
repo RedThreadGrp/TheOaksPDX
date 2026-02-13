@@ -14,6 +14,11 @@ export interface ParsedEvent {
 /**
  * Parses an ICS feed and returns a list of events within a specified date range.
  * Handles recurring events (RRULE), all-day events, and cancelled exceptions (EXDATE/RECURRENCE-ID).
+ * 
+ * @param icsData - The raw ICS data string
+ * @param daysAhead - Number of days to look ahead (default: 90). This provides a 3-month window
+ *                    which balances between showing enough future events and not overloading
+ *                    the UI with too many recurring event instances.
  */
 export function parseICS(icsData: string, daysAhead: number = 90): ParsedEvent[] {
   try {
@@ -63,7 +68,9 @@ export function parseICS(icsData: string, daysAhead: number = 90): ParsedEvent[]
         const iterator = event.iterator();
         let next;
         let count = 0;
-        const maxIterations = 1000; // Safety limit
+        // Safety limit to prevent infinite loops on misconfigured recurring events
+        // This should handle even very frequent events (daily for ~3 years)
+        const maxIterations = 1000;
 
         while ((next = iterator.next()) && count < maxIterations) {
           const occurrenceStart = next.toJSDate();
@@ -99,6 +106,11 @@ export function parseICS(icsData: string, daysAhead: number = 90): ParsedEvent[]
             });
           }
           count++;
+        }
+
+        // Log warning if we hit the iteration limit
+        if (count >= maxIterations) {
+          console.warn(`Recurring event "${event.summary}" hit iteration limit of ${maxIterations}. This may indicate a misconfigured recurring rule.`);
         }
       } else {
         // Non-recurring event

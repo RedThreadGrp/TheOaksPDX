@@ -91,13 +91,17 @@ Rendered Event Cards
 
 ### Caching Strategy
 
-- **Cache Duration**: 15 minutes
+- **Cache Duration**: 15 minutes (configurable via `EVENTS_CACHE_TTL_MINUTES` env var)
 - **Cache Location**: In-memory (server process)
 - **Fallback**: Returns stale cache if fresh fetch fails
 - **Benefits**:
   - Reduces load on Google Calendar API
   - Improves page load time
   - Provides resilience during outages
+- **Limitations**:
+  - In serverless environments (Vercel, AWS Lambda), cache may not persist across function instances
+  - For high-traffic production sites, consider using Next.js `unstable_cache` or distributed cache (Redis, Vercel KV)
+  - Current implementation works well for small to medium traffic sites
 
 ### Mobile Responsiveness
 

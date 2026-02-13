@@ -2,7 +2,10 @@ import { NextResponse } from 'next/server';
 import { parseICS, type ParsedEvent } from '@/lib/ics-parser';
 
 // Cache configuration
-const CACHE_TTL = 15 * 60 * 1000; // 15 minutes in milliseconds
+// Note: In serverless environments (Vercel, AWS Lambda), this in-memory cache
+// may not persist across function invocations. For production deployments with
+// high traffic, consider using Next.js unstable_cache or a distributed cache like Redis.
+const CACHE_TTL = parseInt(process.env.EVENTS_CACHE_TTL_MINUTES || '15', 10) * 60 * 1000;
 let cachedData: { events: ParsedEvent[]; timestamp: number } | null = null;
 
 export const dynamic = 'force-dynamic';
