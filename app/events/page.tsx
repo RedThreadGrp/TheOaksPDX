@@ -1,6 +1,7 @@
 import { getEvents, getSiteConfig } from '@/lib/content';
 import { formatDayName } from '@/lib/hours';
 import type { Metadata } from 'next';
+import EventsList from './EventsList';
 
 export const metadata: Metadata = {
   title: 'Events & Specials | The Oaks Pub PDX',
@@ -60,30 +61,13 @@ export default function EventsPage() {
           </section>
         )}
 
-        {/* Upcoming Events */}
-        {events.upcomingEvents.length > 0 && (
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Upcoming Events</h2>
-            <div className="grid gap-6">
-              {events.upcomingEvents.map((event, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{event.title}</h3>
-                  <p className="text-primary-600 font-medium mb-2">
-                    {new Date(event.date).toLocaleDateString('en-US', {
-                      weekday: 'long',
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}{' '}
-                    at {event.time}
-                    {event.endDate && ` - ${new Date(event.endDate).toLocaleDateString()}`}
-                  </p>
-                  <p className="text-gray-600">{event.description}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+        {/* Upcoming Events from Google Calendar */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Upcoming Events</h2>
+          <EventsList 
+            fallbackMessage={`Follow us on social media or call ${siteConfig.phone} for the latest updates.`}
+          />
+        </section>
 
         {/* Private Parties */}
         {events.privateParties.enabled && (
@@ -105,21 +89,6 @@ export default function EventsPage() {
               </a>
             </div>
           </section>
-        )}
-
-        {events.recurringEvents.length === 0 && events.upcomingEvents.length === 0 && !events.happyHour && (
-          <div className="text-center py-12">
-            <p className="text-lg text-gray-600 mb-4">
-              Check back soon for upcoming events and specials!
-            </p>
-            <p className="text-gray-600">
-              Follow us on social media or call{' '}
-              <a href={`tel:${siteConfig.phone}`} className="text-primary-600 hover:text-primary-700">
-                {siteConfig.phone}
-              </a>{' '}
-              for the latest updates.
-            </p>
-          </div>
         )}
       </div>
     </div>
