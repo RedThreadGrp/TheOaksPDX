@@ -31,7 +31,8 @@ interface CSVRow {
   SectionTitle: string;
   Name: string;
   Description: string;
-  Price: string;
+  PriceNumber: string;
+  PriceDisplay: string;
   Dietary: string;
   Spicy: string;
   AddOns: string;
@@ -55,7 +56,8 @@ function convertToCSV(rows: CSVRow[]): string {
     'SectionTitle',
     'Name',
     'Description',
-    'Price',
+    'PriceNumber',
+    'PriceDisplay',
     'Dietary',
     'Spicy',
     'AddOns',
@@ -73,7 +75,8 @@ function convertToCSV(rows: CSVRow[]): string {
       escapeCSV(row.SectionTitle),
       escapeCSV(row.Name),
       escapeCSV(row.Description),
-      escapeCSV(row.Price),
+      escapeCSV(row.PriceNumber),
+      escapeCSV(row.PriceDisplay),
       escapeCSV(row.Dietary),
       escapeCSV(row.Spicy),
       escapeCSV(row.AddOns),
@@ -87,9 +90,16 @@ function convertToCSV(rows: CSVRow[]): string {
   return csvLines.join('\n');
 }
 
+function parsePriceNumber(priceStr?: string): string {
+  if (!priceStr) return '';
+  // Extract numeric value from price string like "$12" or "12" or "$12.50"
+  const match = priceStr.match(/[\d.]+/);
+  return match ? match[0] : '';
+}
+
 function menuToCSVRows(menu: Menu, type: string): CSVRow[] {
   const rows: CSVRow[] = [];
-  let orderCounter = 0;
+  let orderCounter = 1; // Start at 1 instead of 0
   
   for (const section of menu.sections) {
     // Skip sections with no items
@@ -112,14 +122,16 @@ function menuToCSVRows(menu: Menu, type: string): CSVRow[] {
         SectionTitle: section.title,
         Name: item.name,
         Description: item.description || '',
-        Price: item.price || '',
+        PriceNumber: parsePriceNumber(item.price),
+        PriceDisplay: item.price || '',
         Dietary: dietaryString,
         Spicy: item.spicy ? 'true' : '', // Empty if not spicy or undefined
         AddOns: addOnsString,
         Active: 'true', // Default for sheets - can be edited there
         Featured: 'false', // Default for sheets - can be edited there
-        Order: orderCounter++
+        Order: orderCounter * 10 // Use increments of 10 (10, 20, 30, ...)
       });
+      orderCounter++;
     }
   }
   
