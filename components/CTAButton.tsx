@@ -22,9 +22,9 @@ export default function CTAButton({
   const baseStyles = 'inline-flex items-center justify-center rounded-md font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
   
   const variantStyles = {
-    primary: 'bg-[#1f5f3a] text-[#f5f2ec] hover:bg-[#267348] focus:ring-deep-green shadow-lg tracking-wide px-10 py-4 text-lg',
-    secondary: 'bg-oak-brown text-[#f5f2ec] hover:bg-warm-charcoal focus:ring-oak-brown shadow-md hover:shadow-lg px-8 py-3 text-base md:text-lg',
-    outline: 'border-2 border-[#f5f2ec] text-[#f5f2ec] hover:bg-[#f5f2ec] hover:text-oak-brown focus:ring-[#f5f2ec] backdrop-blur-sm px-8 py-3 text-base md:text-lg',
+    primary: 'bg-[#1f5f3a] text-cream hover:bg-[#267348] focus:ring-deep-green shadow-lg tracking-wide py-4 px-12 text-lg md:text-xl',
+    secondary: 'bg-oak-brown text-cream hover:bg-warm-charcoal focus:ring-oak-brown shadow-md hover:shadow-lg py-4 px-8 text-base',
+    outline: 'border-2 border-cream text-cream hover:bg-cream hover:text-oak-brown focus:ring-cream backdrop-blur-sm py-4 px-8 text-base',
   };
 
   const handleClick = () => {
