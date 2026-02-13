@@ -30,17 +30,17 @@ export default function HomePage() {
       {/* Hero Section - Full Bleed */}
       <section className="relative h-[85vh] flex items-center justify-center bg-oak-brown overflow-hidden">
         {/* Background overlay for when we add image */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
         
         <div className="relative z-10 text-center px-4">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 tracking-tight">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#f5f2ec] mb-4 tracking-tight" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}>
             THE OAKS PUB PDX
           </h1>
           <p className="text-xl md:text-2xl text-cream mb-8 font-light">
             Neighborhood pub in Southeast Portland
           </p>
           
-          <div className="flex justify-center mb-10">
+          <div className="flex justify-center mt-8 mb-8">
             <OpenNowBadge hours={siteConfig.hours} />
           </div>
           
@@ -61,7 +61,7 @@ export default function HomePage() {
       </section>
 
       {/* Quick Info Bar - Dark Strip */}
-      <section className="bg-warm-charcoal text-white py-8">
+      <section className="bg-warm-charcoal text-[#f5f2ec] py-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div className="flex flex-col items-center">
@@ -73,7 +73,7 @@ export default function HomePage() {
             </div>
             <div className="flex flex-col items-center">
               <span className="text-3xl mb-2">📞</span>
-              <a href={`tel:${siteConfig.phone}`} className="text-lg font-medium text-gold hover:text-white transition-colors">
+              <a href={`tel:${siteConfig.phone}`} className="text-lg font-medium text-gold hover:text-[#f5f2ec] transition-colors">
                 {siteConfig.phone}
               </a>
             </div>
@@ -134,7 +134,7 @@ export default function HomePage() {
           <div className="text-center">
             <Link 
               href="/menu" 
-              className="inline-block px-8 py-3 bg-oak-brown text-white font-semibold rounded-lg hover:bg-warm-charcoal transition-colors"
+              className="inline-block px-8 py-3 bg-oak-brown text-[#f5f2ec] font-semibold rounded-lg hover:bg-warm-charcoal transition-colors"
             >
               See Full Menu
             </Link>
@@ -187,7 +187,7 @@ export default function HomePage() {
       </section>
 
       {/* Drinks & Atmosphere Split */}
-      <section className="py-16 bg-oak-brown text-white">
+      <section className="py-16 bg-oak-brown text-[#f5f2ec]">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="bg-warm-charcoal rounded-lg p-8 lg:p-12 aspect-square flex items-center justify-center">
@@ -213,7 +213,7 @@ export default function HomePage() {
               
               <Link 
                 href="/drinks" 
-                className="inline-block px-8 py-3 bg-gold text-oak-brown font-semibold rounded-lg hover:bg-white transition-colors"
+                className="inline-block px-8 py-3 bg-gold text-oak-brown font-semibold rounded-lg hover:bg-[#f5f2ec] transition-colors"
               >
                 VIEW DRINKS
               </Link>
@@ -250,7 +250,7 @@ export default function HomePage() {
 
             <Link 
               href="/events" 
-              className="inline-block px-8 py-3 bg-oak-brown text-white font-semibold rounded-lg hover:bg-warm-charcoal transition-colors"
+              className="inline-block px-8 py-3 bg-oak-brown text-[#f5f2ec] font-semibold rounded-lg hover:bg-warm-charcoal transition-colors"
             >
               See All Events
             </Link>
@@ -279,7 +279,7 @@ export default function HomePage() {
                 href={`https://maps.google.com/?q=${encodeURIComponent(siteConfig.address.street + ', ' + siteConfig.address.city)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-8 py-3 bg-deep-green text-white font-semibold rounded-lg hover:bg-oak-brown transition-colors"
+                className="inline-block px-8 py-3 bg-deep-green text-[#f5f2ec] font-semibold rounded-lg hover:bg-oak-brown transition-colors"
               >
                 Get Directions
               </a>

@@ -13,7 +13,7 @@ export default function OpenNowBadge({ hours, className = '' }: OpenNowBadgeProp
   const todayHours = getTodayHours(hours);
 
   return (
-    <div className={`inline-flex items-center gap-3 px-6 py-3 rounded-full ${isOpen ? 'bg-deep-green' : 'bg-gray-700'} text-white ${className}`}>
+    <div className={`inline-flex items-center gap-3 px-6 py-3 rounded-full ${isOpen ? 'bg-deep-green' : 'bg-gray-700'} text-[#f5f2ec] ${className}`}>
       <span className={`flex h-3 w-3 relative`}>
         <span
           className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
