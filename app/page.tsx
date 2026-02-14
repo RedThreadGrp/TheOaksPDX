@@ -41,50 +41,53 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section - Full Bleed with Wood Texture */}
-      <section className="relative min-h-[60vh] sm:min-h-[65vh] md:min-h-[70vh] flex items-center justify-center bg-oak-brown overflow-hidden py-8 md:py-12">
-        {/* Wood texture overlay */}
+      <section className="relative min-h-[60vh] sm:min-h-[65vh] md:min-h-[70vh] flex items-center justify-center bg-[#2c1f17] overflow-hidden py-8 md:py-12">
+        {/* Subtle wood grain texture */}
         <div 
-          className="absolute inset-0 opacity-[0.06] mix-blend-overlay"
+          className="absolute inset-0 opacity-[0.08] mix-blend-overlay"
           style={{
-            backgroundImage: `repeating-linear-gradient(
-              90deg,
-              rgba(92, 64, 51, 0.3) 0px,
-              rgba(92, 64, 51, 0.5) 2px,
-              rgba(62, 43, 35, 0.4) 4px,
-              rgba(82, 56, 45, 0.3) 6px
-            )`,
-            backgroundSize: '8px 100%',
+            backgroundImage: 'url(/subtle-grunge.png)',
+            backgroundSize: '400px 400px',
+            backgroundRepeat: 'repeat',
           }}
         />
-        {/* Background overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
+        {/* Gradient for readability + vignette */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
+        {/* Vignette effect */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(0,0,0,0.3)_100%)]" />
         
-        <div className="relative z-10 text-center max-w-3xl mx-auto px-6 -mt-8 md:-mt-12">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-cream mb-2 tracking-tight" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}>
+        <div className="relative z-10 text-center max-w-3xl mx-auto px-6">
+          <h1 className="text-5xl md:text-6xl font-serif text-[#f3e6d2] mb-4">
             THE OAKS PUB PDX
           </h1>
-          <p className="text-xl md:text-2xl text-cream mb-3 font-light">
+          
+          <p className="text-lg md:text-xl text-[#e0d3be] mb-6">
             Neighborhood pub in Southeast Portland
           </p>
           
-          <div className="flex justify-center mb-4">
+          <div className="flex justify-center mb-6">
             <OpenNowBadge hours={siteConfig.hours} />
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center">
-            <CTAButton href="/menu" variant="primary" className="w-full sm:w-auto text-xl md:text-2xl py-5 px-14 shadow-xl">
+          <div className="flex flex-wrap justify-center gap-4">
+            <a href="/menu" className="bg-[#1f5f3a] hover:bg-[#184c2e] text-white text-lg px-8 py-3 rounded-md shadow-lg transition">
               VIEW MENU
-            </CTAButton>
-            <OrderButton source="hero" variant="outline" className="w-full sm:w-auto py-3 px-6 text-sm md:text-base" />
-            <CTAButton href={`https://maps.google.com/?q=${encodeURIComponent(siteConfig.address.street + ', ' + siteConfig.address.city)}`} variant="outline" className="w-full sm:w-auto py-3 px-6 text-sm md:text-base">
-              GET DIRECTIONS
-            </CTAButton>
+            </a>
+            
+            <OrderButton source="hero" variant="outline" className="border border-[#d9c7a6] text-[#f3e6d2] px-6 py-2 rounded-md hover:bg-[#d9c7a6]/10 transition" />
+            
+            <a href={`https://maps.google.com/?q=${encodeURIComponent(siteConfig.address.street + ', ' + siteConfig.address.city)}`} target="_blank" rel="noopener noreferrer" className="border border-[#d9c7a6] text-[#f3e6d2] px-6 py-2 rounded-md hover:bg-[#d9c7a6]/10 transition">
+              Get Directions
+            </a>
           </div>
         </div>
+
+        {/* Subtle divider before next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[#d9cfc0]" />
       </section>
 
       {/* Quick Info Bar - Dark Strip */}
-      <section className="bg-warm-charcoal text-cream py-8">
+      <section className="bg-[#d9cfc0] text-[#2c1f17] py-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div className="flex flex-col items-center">
