@@ -1,4 +1,4 @@
-import { getDrinksMenu } from '@/lib/content';
+import { getDrinksMenuFromSheets } from '@/lib/menus/sheetsCsv';
 import DrinksPageClient from './DrinksPageClient';
 import type { Metadata } from 'next';
 
@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'Explore our craft cocktails, local beers, wines, and spirits selection.',
 };
 
-export default function DrinksPage() {
-  const menu = getDrinksMenu();
+export default async function DrinksPage() {
+  const menu = await getDrinksMenuFromSheets();
   return <DrinksPageClient menu={menu} />;
 }

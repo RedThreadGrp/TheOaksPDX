@@ -25,6 +25,16 @@
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer base {
   * {
     @apply border-gray-200;

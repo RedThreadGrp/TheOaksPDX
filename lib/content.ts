@@ -31,18 +31,28 @@ export function getSiteConfig(): SiteConfig {
   );
 }
 
-export function getFoodMenu(): Menu {
+// Synchronous fallback functions for hardcoded JSON
+function getFoodMenuFallback(): Menu {
   return loadAndValidateJSON<Menu>(
     path.join(contentDir, 'menu.food.json'),
     MenuSchema
   );
 }
 
-export function getDrinksMenu(): Menu {
+function getDrinksMenuFallback(): Menu {
   return loadAndValidateJSON<Menu>(
     path.join(contentDir, 'menu.drinks.json'),
     MenuSchema
   );
+}
+
+// Re-export fallback functions with their original names
+export function getFoodMenu(): Menu {
+  return getFoodMenuFallback();
+}
+
+export function getDrinksMenu(): Menu {
+  return getDrinksMenuFallback();
 }
 
 export function getEvents(): Events {
