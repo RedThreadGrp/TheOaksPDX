@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import MenuSection from '@/components/MenuSection';
 import { trackEvent } from '@/lib/analytics';
+import { hasOrdering, siteConfig, getOrderLabel } from '@/lib/siteConfig';
 import type { Menu } from '@/lib/content';
 
 interface DrinksPageClientProps {
@@ -22,6 +23,10 @@ export default function DrinksPageClient({ menu }: DrinksPageClientProps) {
   const handleFilterClick = (filterId: string) => {
     setSelectedFilter(selectedFilter === filterId ? null : filterId);
     trackEvent('menu_filter_used', { filter: filterId });
+  };
+
+  const handleOrderClick = () => {
+    trackEvent('order_click_drinks_banner');
   };
 
   const filteredSections = selectedFilter
@@ -67,10 +72,43 @@ export default function DrinksPageClient({ menu }: DrinksPageClientProps) {
         </div>
       </div>
 
+      {/* Order Banner */}
+      <div className="bg-deep-green text-cream py-6 border-b-4 border-gold sticky top-16 z-20 no-print">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-center sm:text-left">
+              <p className="text-lg md:text-xl font-semibold">
+                {hasOrdering ? 'Ready to order? Pickup online.' : 'Ready to order? Call us for pickup.'}
+              </p>
+            </div>
+            {hasOrdering ? (
+              <a
+                href={siteConfig.orderOnlineUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleOrderClick}
+                className="inline-flex items-center justify-center px-8 py-3 bg-gold text-oak-brown font-bold rounded-lg hover:bg-cream transition-colors shadow-lg whitespace-nowrap"
+              >
+                {getOrderLabel()}
+              </a>
+            ) : (
+              <a
+                href="tel:503-232-1728"
+                onClick={handleOrderClick}
+                className="inline-flex items-center justify-center px-8 py-3 bg-gold text-oak-brown font-bold rounded-lg hover:bg-cream transition-colors shadow-lg whitespace-nowrap"
+              >
+                Call to Order
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+
       <div className="container mx-auto px-4 py-12 pb-24 md:pb-12">
         <div className="max-w-4xl mx-auto">
           {/* Dietary Filters */}
-          <div className="mb-12 no-print sticky top-16 bg-cream py-4 z-10 border-b border-gold/30">
+          {/* Positioned below the sticky ordering banner (top-40 = 10rem accounts for navbar + banner) */}
+          <div className="mb-12 no-print sticky top-40 bg-cream py-4 z-10 border-b border-gold/30">
             <div className="flex flex-wrap gap-3 justify-center">
               {dietaryFilters.map((filter) => (
                 <button
@@ -109,6 +147,32 @@ export default function DrinksPageClient({ menu }: DrinksPageClientProps) {
               <div className="text-center py-16">
                 <p className="text-lg text-gray-600">No items match your dietary preferences.</p>
               </div>
+            )}
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="mt-16 pt-8 border-t-2 border-gold/30 text-center no-print">
+            <h3 className="text-2xl font-bold text-oak-brown mb-4">
+              {hasOrdering ? 'Ready to order?' : 'Questions about our drinks?'}
+            </h3>
+            {hasOrdering ? (
+              <a
+                href={siteConfig.orderOnlineUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleOrderClick}
+                className="inline-flex items-center justify-center px-10 py-4 bg-deep-green text-cream font-bold rounded-lg hover:bg-oak-brown transition-colors shadow-lg text-lg"
+              >
+                {getOrderLabel()}
+              </a>
+            ) : (
+              <a
+                href="tel:503-232-1728"
+                onClick={handleOrderClick}
+                className="inline-flex items-center justify-center px-10 py-4 bg-deep-green text-cream font-bold rounded-lg hover:bg-oak-brown transition-colors shadow-lg text-lg"
+              >
+                Call Us: 503-232-1728
+              </a>
             )}
           </div>
         </div>
