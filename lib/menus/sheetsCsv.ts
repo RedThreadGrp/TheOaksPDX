@@ -61,11 +61,12 @@ function parseOrder(value: string): number {
 }
 
 // Parse AddOns column (conservative approach)
+// Expected format: "Name (+$2), Name2 (+$3)" or "Name ($2), Name2 ($3)"
 function parseAddOns(value: string): Array<{ name: string; price: string }> | undefined {
   if (!value || !value.trim()) return undefined;
   
-  // Try to parse pattern like "Name (+$2), Name2 (+$3)"
-  const addOnPattern = /([^(]+)\s*\(\+\$?([\d.]+)\)/g;
+  // Try to parse pattern like "Name (+$2)" or "Name ($2)"
+  const addOnPattern = /([^(]+)\s*\(\+?\$?([\d.]+)\)/g;
   const matches = [...value.matchAll(addOnPattern)];
   
   if (matches.length === 0) {
@@ -199,37 +200,46 @@ async function getMenuFromSheets(
   fallbackFn: () => MenuData
 ): Promise<MenuData> {
   try {
-    const revalidateSeconds = parseInt(
-      process.env.OAKS_MENU_REVALIDATE_SECONDS || '300',
-      10
-    );
-
-    const records = await fetchAndParseCSV(url, revalidateSeconds);
-
-    // Filter active rows and parse
-    const activeRows = records
-      .filter(row => parseActive(row.Active))
-      .map(row => ({
-        row,
-        order: parseOrder(row.Order),
-      }));
-
-    if (activeRows.length === 0) {
-      console.warn('No active rows found in CSV, falling back to hardcoded menu');
-      return fallbackFn();
+    const revalidateSecondsStr = process.env.OAKS_MENU_REVALIDATE_SECONDS || '300';
+    const revalidateSeconds = parseInt(revalidateSecondsStr, 10);
+    
+    // Validate parsed value
+    if (isNaN(revalidateSeconds) || revalidateSeconds < 0) {
+      console.warn(`Invalid OAKS_MENU_REVALIDATE_SECONDS value: ${revalidateSecondsStr}, using default 300`);
+      const records = await fetchAndParseCSV(url, 300);
+      return processRecords(records, fallbackFn);
     }
 
-    const sections = groupIntoSections(activeRows);
-
-    return {
-      lastUpdatedISO: new Date().toISOString(),
-      sections,
-    };
+    const records = await fetchAndParseCSV(url, revalidateSeconds);
+    return processRecords(records, fallbackFn);
   } catch (error) {
     console.error('Error fetching menu from Sheets:', error);
     console.log('Falling back to hardcoded menu');
     return fallbackFn();
   }
+}
+
+// Helper to process records into MenuData
+function processRecords(records: CSVRow[], fallbackFn: () => MenuData): MenuData {
+  // Filter active rows and parse
+  const activeRows = records
+    .filter(row => parseActive(row.Active))
+    .map(row => ({
+      row,
+      order: parseOrder(row.Order),
+    }));
+
+  if (activeRows.length === 0) {
+    console.warn('No active rows found in CSV, falling back to hardcoded menu');
+    return fallbackFn();
+  }
+
+  const sections = groupIntoSections(activeRows);
+
+  return {
+    lastUpdatedISO: new Date().toISOString(),
+    sections,
+  };
 }
 
 // Export public functions
