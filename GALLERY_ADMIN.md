@@ -16,8 +16,8 @@ This document explains how to use the new Cloudinary-based gallery system for Th
 Make sure the following environment variables are set in Vercel (or `.env.local` for local development):
 
 ```env
-CLOUDINARY_CLOUD_NAME=delcvhexz
-CLOUDINARY_API_KEY=537247855641876
+CLOUDINARY_CLOUD_NAME=your_cloud_name_here
+CLOUDINARY_API_KEY=your_api_key_here
 CLOUDINARY_API_SECRET=your_actual_secret_here
 CLOUDINARY_GALLERY_FOLDER=oaks/gallery
 CLOUDINARY_UPLOAD_PRESET=oaks_gallery_signed
@@ -80,8 +80,8 @@ Get signed upload parameters (requires admin cookie).
   "signature": "abc123...",
   "folder": "oaks/gallery",
   "uploadPreset": "oaks_gallery_signed",
-  "cloudName": "delcvhexz",
-  "apiKey": "537247855641876"
+  "cloudName": "your_cloud_name",
+  "apiKey": "your_api_key"
 }
 ```
 

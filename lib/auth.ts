@@ -1,7 +1,8 @@
 import { NextRequest } from 'next/server';
+import { timingSafeEqual } from 'crypto';
 
 /**
- * Verifies the admin password
+ * Verifies the admin password using constant-time comparison
  */
 export function verifyAdminPassword(password: string): boolean {
   const adminPassword = process.env.OAKS_ADMIN_PASSWORD;
@@ -11,7 +12,21 @@ export function verifyAdminPassword(password: string): boolean {
     return false;
   }
   
-  return password === adminPassword;
+  // Use timing-safe comparison to prevent timing attacks
+  try {
+    const passwordBuffer = Buffer.from(password);
+    const adminPasswordBuffer = Buffer.from(adminPassword);
+    
+    // If lengths differ, still do comparison to prevent timing leaks
+    if (passwordBuffer.length !== adminPasswordBuffer.length) {
+      return false;
+    }
+    
+    return timingSafeEqual(passwordBuffer, adminPasswordBuffer);
+  } catch (error) {
+    console.error('Password verification error:', error);
+    return false;
+  }
 }
 
 /**

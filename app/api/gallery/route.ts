@@ -1,23 +1,8 @@
 import { NextResponse } from 'next/server';
-import { v2 as cloudinary } from 'cloudinary';
-
-// Configure Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+import { cloudinary, type GalleryImage } from '@/lib/cloudinary';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 300; // Revalidate every 5 minutes
-
-export type GalleryImage = {
-  public_id: string;
-  secure_url: string;
-  width: number;
-  height: number;
-  created_at: string;
-};
 
 export async function GET() {
   try {

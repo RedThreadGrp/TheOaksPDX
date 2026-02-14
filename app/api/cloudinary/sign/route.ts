@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/auth';
-import { v2 as cloudinary } from 'cloudinary';
-
-// Configure Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+import { cloudinary } from '@/lib/cloudinary';
 
 export async function POST(request: NextRequest) {
   // Check admin authentication
@@ -17,9 +10,18 @@ export async function POST(request: NextRequest) {
   }
 
   try {
+    // Validate required environment variables
+    if (!process.env.CLOUDINARY_UPLOAD_PRESET) {
+      console.error('CLOUDINARY_UPLOAD_PRESET environment variable is not set');
+      return NextResponse.json(
+        { error: 'Server configuration error: upload preset not configured' },
+        { status: 500 }
+      );
+    }
+
     const timestamp = Math.round(new Date().getTime() / 1000);
     const folder = process.env.CLOUDINARY_GALLERY_FOLDER || 'oaks/gallery';
-    const uploadPreset = process.env.CLOUDINARY_UPLOAD_PRESET || 'oaks_gallery_signed';
+    const uploadPreset = process.env.CLOUDINARY_UPLOAD_PRESET;
 
     // Generate signature
     const signature = cloudinary.utils.api_sign_request(
