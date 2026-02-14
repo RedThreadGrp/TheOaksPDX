@@ -8,6 +8,13 @@ import SpecialsStrip from '@/components/specials/SpecialsStrip';
 import Link from 'next/link';
 import Image from 'next/image';
 
+// Google Reviews constants
+const GOOGLE_REVIEW_DATA = {
+  rating: '4.6',
+  count: '100+',
+  featuredReview: '"Great neighborhood spot with excellent food and friendly service. Love the atmosphere!"',
+};
+
 export default async function HomePage() {
   const siteConfig = getSiteConfig();
   const todayHours = getTodayHours(siteConfig.hours);
@@ -33,29 +40,43 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - Full Bleed */}
-      <section className="relative min-h-[65vh] sm:min-h-[75vh] md:min-h-[80vh] flex items-center justify-center bg-oak-brown overflow-hidden py-16 md:py-20">
-        {/* Background overlay for when we add image */}
+      {/* Hero Section - Full Bleed with Wood Texture */}
+      <section className="relative min-h-[60vh] sm:min-h-[65vh] md:min-h-[70vh] flex items-center justify-center bg-oak-brown overflow-hidden py-8 md:py-12">
+        {/* Wood texture overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.06] mix-blend-overlay"
+          style={{
+            backgroundImage: `repeating-linear-gradient(
+              90deg,
+              rgba(92, 64, 51, 0.3) 0px,
+              rgba(92, 64, 51, 0.5) 2px,
+              rgba(62, 43, 35, 0.4) 4px,
+              rgba(82, 56, 45, 0.3) 6px
+            )`,
+            backgroundSize: '8px 100%',
+          }}
+        />
+        {/* Background overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
         
-        <div className="relative z-10 text-center max-w-3xl mx-auto px-6">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-cream mb-3 tracking-tight" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}>
+        <div className="relative z-10 text-center max-w-3xl mx-auto px-6 -mt-8 md:-mt-12">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-cream mb-2 tracking-tight" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}>
             THE OAKS PUB PDX
           </h1>
-          <p className="text-xl md:text-2xl text-cream mb-4 font-light">
+          <p className="text-xl md:text-2xl text-cream mb-3 font-light">
             Neighborhood pub in Southeast Portland
           </p>
           
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-4">
             <OpenNowBadge hours={siteConfig.hours} />
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-stretch sm:items-center">
-            <CTAButton href="/menu" variant="primary" className="w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center">
+            <CTAButton href="/menu" variant="primary" className="w-full sm:w-auto text-xl md:text-2xl py-5 px-14 shadow-xl">
               VIEW MENU
             </CTAButton>
-            <OrderButton source="hero" variant="outline" className="w-full sm:w-auto" />
-            <CTAButton href={`https://maps.google.com/?q=${encodeURIComponent(siteConfig.address.street + ', ' + siteConfig.address.city)}`} variant="outline" className="w-full sm:w-auto">
+            <OrderButton source="hero" variant="outline" className="w-full sm:w-auto py-3 px-6 text-sm md:text-base" />
+            <CTAButton href={`https://maps.google.com/?q=${encodeURIComponent(siteConfig.address.street + ', ' + siteConfig.address.city)}`} variant="outline" className="w-full sm:w-auto py-3 px-6 text-sm md:text-base">
               GET DIRECTIONS
             </CTAButton>
           </div>
@@ -91,6 +112,35 @@ export default async function HomePage() {
 
       {/* Specials Section - First Thing Users See */}
       {specialsData && <SpecialsStrip specialsData={specialsData} />}
+
+      {/* Google Reviews Badge - Social Proof */}
+      <section className="py-10 bg-gradient-to-b from-cream to-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center gap-3 bg-white px-6 py-4 rounded-xl shadow-md mb-4">
+              <span className="text-3xl text-gold">★★★★★</span>
+              <div className="text-left">
+                <div className="text-2xl font-bold text-oak-brown">4.6 on Google</div>
+                <p className="text-sm text-gray-600">Based on 100+ reviews</p>
+              </div>
+            </div>
+            <p className="text-gray-700 italic max-w-xl mx-auto mb-3">
+              "Great neighborhood spot with excellent food and friendly service. Love the atmosphere!"
+            </p>
+            <a 
+              href="https://www.google.com/maps/search/?api=1&query=The+Oaks+Pub+PDX+1621+SE+Bybee+Blvd+Portland" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-deep-green hover:text-oak-brown font-semibold text-sm"
+            >
+              Read more on Google →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Subtle divider */}
+      <div className="h-px bg-gradient-to-r from-transparent via-oak-brown/20 to-transparent"></div>
 
       {/* Featured Menu Items */}
       <section className="py-16 bg-cream">
@@ -147,24 +197,20 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Google Reviews Placeholder */}
+      {/* Google Reviews - Full Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="mb-8">
-              <div className="flex justify-center items-center gap-2 mb-3">
-                <span className="text-4xl text-gold">★★★★★</span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-oak-brown mb-2">
-                4.6 on Google
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl font-bold text-oak-brown mb-4">
+                What Our Customers Say
               </h2>
-              <p className="text-gray-600">Based on customer reviews</p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-cream p-6 rounded-lg">
                 <div className="text-gold mb-2">★★★★★</div>
-                <p className="text-gray-700 italic mb-3">"Great neighborhood spot with excellent food and friendly service. Love the atmosphere!"</p>
+                <p className="text-gray-700 italic mb-3">{GOOGLE_REVIEW_DATA.featuredReview}</p>
                 <p className="text-sm text-gray-500">- Google Review</p>
               </div>
               <div className="bg-cream p-6 rounded-lg">
@@ -178,15 +224,6 @@ export default async function HomePage() {
                 <p className="text-sm text-gray-500">- Google Review</p>
               </div>
             </div>
-
-            <a 
-              href="https://www.google.com/maps/search/?api=1&query=The+Oaks+Pub+PDX+1621+SE+Bybee+Blvd+Portland" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-deep-green hover:text-oak-brown font-semibold"
-            >
-              Read more reviews on Google →
-            </a>
           </div>
         </div>
       </section>

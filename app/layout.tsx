@@ -7,6 +7,7 @@ import { generateRestaurantSchema, generateJSONLD } from '@/lib/schema'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import StickyActionBar from '@/components/StickyActionBar'
+import LiveTickerStrip from '@/components/LiveTickerStrip'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.theoakspubpdx.com';
 
@@ -73,6 +74,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
+        <LiveTickerStrip />
         <Navbar siteConfig={siteConfig} />
         <main className="min-h-screen">
           {children}
