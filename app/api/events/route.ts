@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { parseICS, type ParsedEvent } from '@/lib/ics-parser';
 
+// Placeholder text used in .env.example for calendar URL
+const PLACEHOLDER_CALENDAR_ID = 'YOUR_CALENDAR_ID';
+
 // Cache configuration
 // Note: In serverless environments (Vercel, AWS Lambda), this in-memory cache
 // may not persist across function invocations. For production deployments with
@@ -24,7 +27,7 @@ async function fetchAndParseICS(): Promise<ParsedEvent[]> {
   }
 
   const icsUrl = process.env.OAKS_EVENTS_ICS_URL;
-  if (!icsUrl || icsUrl.includes('YOUR_CALENDAR_ID')) {
+  if (!icsUrl || icsUrl.includes(PLACEHOLDER_CALENDAR_ID)) {
     throw new Error('Events calendar is not yet configured. Please check back later.');
   }
 
