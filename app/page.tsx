@@ -2,14 +2,19 @@ import { getSiteConfig, getFoodMenu, getDrinksMenu, getEvents } from '@/lib/cont
 import OpenNowBadge from '@/components/OpenNowBadge';
 import CTAButton from '@/components/CTAButton';
 import { getTodayHours, formatHours } from '@/lib/hours';
+import { getSpecialsFromSheets } from '@/lib/specials/sheetsSpecialsCsv';
+import SpecialsStrip from '@/components/specials/SpecialsStrip';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function HomePage() {
+export default async function HomePage() {
   const siteConfig = getSiteConfig();
   const todayHours = getTodayHours(siteConfig.hours);
   const foodMenu = getFoodMenu();
   const drinksMenu = getDrinksMenu();
+  
+  // Fetch specials from Google Sheets
+  const specialsData = await getSpecialsFromSheets();
 
   // Featured menu items
   const featuredFood = [
@@ -86,6 +91,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Specials Section - First Thing Users See */}
+      {specialsData && <SpecialsStrip specialsData={specialsData} />}
 
       {/* Featured Menu Items */}
       <section className="py-16 bg-cream">
