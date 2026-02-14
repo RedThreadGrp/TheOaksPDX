@@ -48,11 +48,11 @@ The **TickerItems** tab should have these columns:
 
 ```csv
 Id,Message,StartDate,EndDate,DaysOfWeek,StartTime,EndTime,Active,Order
-1,Happy Hour 3-6pm Daily! 🍺,,,,,15:00,18:00,true,1
+1,Happy Hour 3-6pm Daily! 🍺,,,,,,,true,1
 2,Live Music This Friday! 🎵,2026-02-14,2026-02-14,fri,,,true,2
 3,Trivia Night Every Wednesday! 🧠,,,wed,,,true,3
-4,Weekend Brunch 10am-2pm! 🥞,,,sat,sun,10:00,14:00,true,4
-5,New Menu Coming Soon!,2026-03-01,,,,true,5
+4,Weekend Brunch 10am-2pm! 🥞,,,"sat,sun",10:00,14:00,true,4
+5,New Menu Coming Soon!,2026-03-01,,,,,true,5
 ```
 
 ## Filtering Logic
@@ -128,7 +128,7 @@ Id,Message,StartTime,EndTime,Active,Order
 Show brunch message only on weekends:
 ```csv
 Id,Message,DaysOfWeek,Active,Order
-2,Weekend Brunch Available! 🥞,sat,sun,true,2
+2,Weekend Brunch Available! 🥞,"sat,sun",true,2
 ```
 
 ### Event Promotion
