@@ -15,8 +15,30 @@ export interface SiteOrderingConfig {
 export const siteConfig: SiteOrderingConfig = {
   orderOnlineUrl: process.env.OAKS_ORDER_ONLINE_URL?.trim() || '',
   orderMode: (process.env.OAKS_ORDER_MODE?.trim() || 'pickup') as OrderMode,
-  orderLabel: process.env.OAKS_ORDER_LABEL?.trim() || 'Order Pickup',
+  orderLabel: getDefaultOrderLabel(),
 };
+
+/**
+ * Get default order label based on mode if not explicitly set
+ */
+function getDefaultOrderLabel(): string {
+  // If custom label is set, use it
+  if (process.env.OAKS_ORDER_LABEL?.trim()) {
+    return process.env.OAKS_ORDER_LABEL.trim();
+  }
+  
+  // Otherwise use mode-based defaults
+  const mode = (process.env.OAKS_ORDER_MODE?.trim() || 'pickup') as OrderMode;
+  switch (mode) {
+    case 'delivery':
+      return 'Order Delivery';
+    case 'both':
+      return 'Order Online';
+    case 'pickup':
+    default:
+      return 'Order Pickup';
+  }
+}
 
 /**
  * Helper to check if online ordering is enabled
@@ -29,19 +51,6 @@ export const hasOrdering = Boolean(siteConfig.orderOnlineUrl);
  * Provides sensible defaults for different ordering modes
  */
 export function getOrderLabel(): string {
-  // If custom label is set, use it
-  if (process.env.OAKS_ORDER_LABEL?.trim()) {
-    return process.env.OAKS_ORDER_LABEL.trim();
-  }
-  
-  // Otherwise use mode-based defaults
-  switch (siteConfig.orderMode) {
-    case 'delivery':
-      return 'Order Delivery';
-    case 'both':
-      return 'Order Online';
-    case 'pickup':
-    default:
-      return 'Order Pickup';
-  }
+  // Use the configured label (which already handles env var or defaults)
+  return siteConfig.orderLabel;
 }

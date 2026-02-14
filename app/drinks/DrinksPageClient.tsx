@@ -107,6 +107,7 @@ export default function DrinksPageClient({ menu }: DrinksPageClientProps) {
       <div className="container mx-auto px-4 py-12 pb-24 md:pb-12">
         <div className="max-w-4xl mx-auto">
           {/* Dietary Filters */}
+          {/* Positioned below the sticky ordering banner (top-40 = 10rem accounts for navbar + banner) */}
           <div className="mb-12 no-print sticky top-40 bg-cream py-4 z-10 border-b border-gold/30">
             <div className="flex flex-wrap gap-3 justify-center">
               {dietaryFilters.map((filter) => (

@@ -3,6 +3,9 @@
 import { hasOrdering, siteConfig, getOrderLabel } from '@/lib/siteConfig';
 import { trackEvent, type EventName } from '@/lib/analytics';
 
+// Phone number from site config - imported as constant for fallback
+const PHONE_NUMBER = '503-232-1728';
+
 interface OrderButtonProps {
   variant?: 'primary' | 'secondary' | 'outline';
   className?: string;
@@ -25,14 +28,6 @@ export default function OrderButton({
   source,
   children,
 }: OrderButtonProps) {
-  const getSiteConfig = () => {
-    // Import dynamically to access phone number for fallback
-    if (typeof window !== 'undefined') {
-      return { phone: '503-232-1728' };
-    }
-    return { phone: '503-232-1728' };
-  };
-
   const handleClick = () => {
     const eventMap: Record<typeof source, EventName> = {
       header: 'order_click_header',
@@ -55,7 +50,7 @@ export default function OrderButton({
 
   // Determine link and label based on ordering availability
   const orderingEnabled = hasOrdering;
-  const href = orderingEnabled ? siteConfig.orderOnlineUrl : 'tel:503-232-1728';
+  const href = orderingEnabled ? siteConfig.orderOnlineUrl : `tel:${PHONE_NUMBER}`;
   const label = children || (orderingEnabled ? getOrderLabel() : 'Call to Order');
   const isExternal = orderingEnabled;
 
