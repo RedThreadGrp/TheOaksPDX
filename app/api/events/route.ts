@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { parseICS, type ParsedEvent } from '@/lib/ics-parser';
 
+// Placeholder text used in .env.example for calendar URL
+const PLACEHOLDER_CALENDAR_ID = 'YOUR_CALENDAR_ID';
+
 // Cache configuration
 // Note: In serverless environments (Vercel, AWS Lambda), this in-memory cache
 // may not persist across function invocations. For production deployments with
@@ -24,8 +27,8 @@ async function fetchAndParseICS(): Promise<ParsedEvent[]> {
   }
 
   const icsUrl = process.env.OAKS_EVENTS_ICS_URL;
-  if (!icsUrl) {
-    throw new Error('OAKS_EVENTS_ICS_URL environment variable is not configured');
+  if (!icsUrl || icsUrl.includes(PLACEHOLDER_CALENDAR_ID)) {
+    throw new Error('Events calendar is not yet configured. Please check back later.');
   }
 
   console.log('Fetching fresh ICS data from:', icsUrl);
@@ -60,6 +63,18 @@ async function fetchAndParseICS(): Promise<ParsedEvent[]> {
     if (cachedData) {
       console.log('Returning stale cached data as fallback');
       return cachedData.events;
+    }
+
+    // Provide more helpful error messages
+    if (error instanceof Error) {
+      // Check for network/DNS errors more reliably
+      const errorWithCode = error as Error & { code?: string; cause?: { code?: string } };
+      const errorCode = errorWithCode.code || errorWithCode.cause?.code;
+      
+      if (errorCode === 'ENOTFOUND' || errorCode === 'EAI_AGAIN' || 
+          error.message.includes('fetch failed') || error.message.includes('getaddrinfo')) {
+        throw new Error('Unable to connect to events calendar. Please check back later.');
+      }
     }
 
     throw error;
