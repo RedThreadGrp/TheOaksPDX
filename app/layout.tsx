@@ -7,8 +7,8 @@ import { generateRestaurantSchema, generateJSONLD } from '@/lib/schema'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import StickyActionBar from '@/components/StickyActionBar'
-import LiveTickerStrip from '@/components/LiveTickerStrip'
-import AnnouncementBar from '@/components/AnnouncementBar'
+import UnifiedTicker from '@/components/UnifiedTicker'
+import { getTickerData } from '@/lib/ticker-data'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.theoakspubpdx.com';
 
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
@@ -62,6 +62,9 @@ export default function RootLayout({
   const siteConfig = getSiteConfig();
   const restaurantSchema = generateRestaurantSchema(siteConfig, siteUrl);
   const jsonLd = generateJSONLD(restaurantSchema);
+  
+  // Fetch ticker data server-side
+  const tickerData = await getTickerData();
   
   return (
     <html lang="en">
@@ -75,8 +78,10 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
-        <LiveTickerStrip />
-        <AnnouncementBar />
+        <UnifiedTicker 
+          specialsItems={tickerData.specialsItems}
+          nextEventItem={tickerData.nextEventItem}
+        />
         <Navbar siteConfig={siteConfig} />
         <main className="min-h-screen">
           {children}

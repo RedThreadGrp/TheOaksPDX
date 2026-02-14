@@ -81,9 +81,6 @@ export default async function HomePage() {
             </a>
           </div>
         </div>
-
-        {/* Subtle divider before next section */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[#d9cfc0]" />
       </section>
 
       {/* Quick Info Bar - Dark Strip */}
