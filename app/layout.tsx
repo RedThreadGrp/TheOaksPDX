@@ -64,7 +64,7 @@ export default async function RootLayout({
   const jsonLd = generateJSONLD(restaurantSchema);
   
   // Fetch ticker data server-side
-  const tickerData = await getTickerData();
+  const tickerItems = await getTickerData();
   
   return (
     <html lang="en">
@@ -78,10 +78,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
-        <UnifiedTicker 
-          tickerItems={tickerData.tickerItems}
-          nextEventItem={tickerData.nextEventItem}
-        />
+        <UnifiedTicker tickerItems={tickerItems} />
         <Navbar siteConfig={siteConfig} />
         <main className="min-h-screen">
           {children}

@@ -8,19 +8,12 @@ interface TickerItem {
 
 interface UnifiedTickerProps {
   tickerItems: TickerItem[];
-  nextEventItem: TickerItem | null;
 }
 
-export default function UnifiedTicker({ tickerItems, nextEventItem }: UnifiedTickerProps) {
-  // Combine ticker messages and next event
-  const allItems = [...tickerItems];
-  if (nextEventItem) {
-    allItems.push(nextEventItem);
-  }
-
+export default function UnifiedTicker({ tickerItems }: UnifiedTickerProps) {
   // If no items, show a default message
-  const displayItems = allItems.length > 0 
-    ? allItems 
+  const displayItems = tickerItems.length > 0 
+    ? tickerItems 
     : [{ id: 'default', text: 'Check Events for What\'s Happening', emoji: '🎉' }];
 
   // Create doubled content for seamless scrolling
