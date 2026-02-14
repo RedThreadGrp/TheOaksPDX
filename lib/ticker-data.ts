@@ -1,4 +1,4 @@
-import { getSpecialsFromSheets } from './specials/sheetsSpecialsCsv';
+import { getTickerMessagesFromCSV } from './ticker-csv';
 import { parseICS } from './ics-parser';
 
 export interface TickerItem {
@@ -82,55 +82,42 @@ async function getNextCalendarEvent(): Promise<TickerItem | null> {
 }
 
 /**
- * Fetches ticker items from Specials
+ * Fetches ticker items from dedicated ticker CSV
  */
-async function getSpecialsTickerItems(): Promise<TickerItem[]> {
+async function getTickerItemsFromCSV(): Promise<TickerItem[]> {
   try {
-    const specialsData = await getSpecialsFromSheets();
+    const messages = await getTickerMessagesFromCSV();
     
-    if (!specialsData || specialsData.specials.length === 0) {
+    if (!messages || messages.length === 0) {
       return [];
     }
 
-    // Convert specials to ticker items (limit to first 3 for ticker)
-    return specialsData.specials.slice(0, 3).map(special => {
-      // Choose emoji based on type
-      const emojiMap: Record<string, string> = {
-        food: '🍽️',
-        drinks: '🍻',
-        event: '🎸',
-        happyhour: '🍺',
-        other: '✨',
-      };
-
-      const emoji = emojiMap[special.type] || '✨';
-      
-      return {
-        id: `special-${special.id}`,
-        text: `${special.title}${special.price ? ' - ' + special.price : ''}`,
-        emoji,
-      };
-    });
+    // Convert messages to ticker items
+    return messages.map(msg => ({
+      id: `ticker-${msg.id}`,
+      text: msg.message,
+      emoji: '✨', // Default emoji for ticker messages
+    }));
   } catch (error) {
-    console.error('Error fetching specials for ticker:', error);
+    console.error('Error fetching ticker messages:', error);
     return [];
   }
 }
 
 /**
- * Gets all ticker data (specials + next calendar event)
+ * Gets all ticker data (ticker messages + next calendar event)
  */
 export async function getTickerData(): Promise<{
-  specialsItems: TickerItem[];
+  tickerItems: TickerItem[];
   nextEventItem: TickerItem | null;
 }> {
-  const [specialsItems, nextEventItem] = await Promise.all([
-    getSpecialsTickerItems(),
+  const [tickerItems, nextEventItem] = await Promise.all([
+    getTickerItemsFromCSV(),
     getNextCalendarEvent(),
   ]);
 
   return {
-    specialsItems,
+    tickerItems,
     nextEventItem,
   };
 }
