@@ -228,38 +228,29 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Drinks & Atmosphere Split */}
+      {/* Drinks & Atmosphere */}
       <section className="py-16 bg-oak-brown text-cream">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="bg-warm-charcoal rounded-lg p-8 lg:p-12 aspect-square flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-6xl mb-4">🍸</div>
-                <p className="text-xl text-gold">Craft Cocktails</p>
-              </div>
-            </div>
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Craft Cocktails. Local Beer.<br />No Pretension.
+            </h2>
             
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Craft Cocktails. Local Beer.<br />No Pretension.
-              </h2>
-              
-              <ul className="space-y-4 mb-8 text-lg">
-                {siteConfig.features.map((feature, index) => (
-                  <li key={index} className="flex items-center">
-                    <span className="text-gold mr-3">✓</span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              
-              <Link 
-                href="/drinks" 
-                className="inline-block px-8 py-3 bg-gold text-oak-brown font-semibold rounded-lg hover:bg-cream transition-colors"
-              >
-                VIEW DRINKS
-              </Link>
-            </div>
+            <ul className="space-y-4 mb-8 text-lg max-w-2xl mx-auto">
+              {siteConfig.features.map((feature, index) => (
+                <li key={index} className="flex items-center justify-center">
+                  <span className="text-gold mr-3">✓</span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            
+            <Link 
+              href="/drinks" 
+              className="inline-block px-8 py-3 bg-gold text-oak-brown font-semibold rounded-lg hover:bg-cream transition-colors"
+            >
+              VIEW DRINKS
+            </Link>
           </div>
         </div>
       </section>

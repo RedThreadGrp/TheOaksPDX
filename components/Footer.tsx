@@ -108,16 +108,16 @@ export default function Footer({ siteConfig }: FooterProps) {
         </div>
 
         <div className="border-t border-gold/20 mt-8 pt-8 text-center text-sm">
-          <p>
+          <p className="mb-2">
             &copy; {currentYear} {siteConfig.businessName}. All rights reserved
-            <Link 
-              href="/admin/gallery-upload" 
-              className="text-cream/30 hover:text-gold transition-colors ml-1"
-              aria-label="Admin Gallery Upload"
-            >
-              .
-            </Link>
           </p>
+          <Link 
+            href="/admin/gallery-upload" 
+            className="text-cream/50 hover:text-gold transition-colors text-xs underline"
+            aria-label="Admin Sign In"
+          >
+            Admin Sign In
+          </Link>
         </div>
       </div>
     </footer>
