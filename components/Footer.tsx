@@ -114,7 +114,6 @@ export default function Footer({ siteConfig }: FooterProps) {
           <Link 
             href="/admin/gallery-upload" 
             className="text-cream/50 hover:text-gold transition-colors text-xs underline"
-            aria-label="Admin Sign In"
           >
             Admin Sign In
           </Link>
