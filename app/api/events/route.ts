@@ -67,7 +67,12 @@ async function fetchAndParseICS(): Promise<ParsedEvent[]> {
 
     // Provide more helpful error messages
     if (error instanceof Error) {
-      if (error.message.includes('ENOTFOUND') || error.message.includes('getaddrinfo')) {
+      // Check for network/DNS errors more reliably
+      const errorWithCode = error as Error & { code?: string; cause?: { code?: string } };
+      const errorCode = errorWithCode.code || errorWithCode.cause?.code;
+      
+      if (errorCode === 'ENOTFOUND' || errorCode === 'EAI_AGAIN' || 
+          error.message.includes('fetch failed') || error.message.includes('getaddrinfo')) {
         throw new Error('Unable to connect to events calendar. Please check back later.');
       }
     }
