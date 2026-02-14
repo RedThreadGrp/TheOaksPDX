@@ -8,6 +8,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import StickyActionBar from '@/components/StickyActionBar'
 import LiveTickerStrip from '@/components/LiveTickerStrip'
+import AnnouncementBar from '@/components/AnnouncementBar'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.theoakspubpdx.com';
 
@@ -75,6 +76,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <LiveTickerStrip />
+        <AnnouncementBar />
         <Navbar siteConfig={siteConfig} />
         <main className="min-h-screen">
           {children}
