@@ -39,7 +39,7 @@ export async function getGalleryImages(): Promise<GalleryImage[]> {
         height: resource.height,
         created_at: resource.created_at,
       }))
-      .sort((a, b) => 
+      .sort((a: GalleryImage, b: GalleryImage) => 
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       );
 
