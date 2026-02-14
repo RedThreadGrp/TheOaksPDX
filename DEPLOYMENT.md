@@ -127,12 +127,20 @@ Route (app)
    ```
    *(Vercel auto-detects these)*
 
-3. **Set Environment Variables** (Optional)
+3. **Set Environment Variables**
    ```
+   # Required for menu integration (NEW)
+   OAKS_FOOD_CSV_URL=https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6AerF_P9DPnZ9h0kOcOxs2V5HUFfBSacGc6uRd2bruCXjtJF9B0ZtwBi7SryMEmIRTjN7s3Cji4K2/pub?gid=0&single=true&output=csv
+   OAKS_DRINKS_CSV_URL=https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6AerF_P9DPnZ9h0kOcOxs2V5HUFfBSacGc6uRd2bruCXjtJF9B0ZtwBi7SryMEmIRTjN7s3Cji4K2/pub?gid=1210313943&single=true&output=csv
+   OAKS_MENU_REVALIDATE_SECONDS=300
+   
+   # Optional for contact form
    RESEND_API_KEY=your_api_key_here
    CONTACT_TO_EMAIL=info@theoakspubpdx.com
    NEXT_PUBLIC_SITE_URL=https://www.theoakspubpdx.com
    ```
+   
+   **Note:** Menu environment variables are required for Google Sheets integration. If not set, the system will fall back to hardcoded JSON menus.
 
 4. **Deploy**
    - Click "Deploy"
@@ -254,6 +262,17 @@ Edit `content/site.json`:
 ```
 
 ### Adding Menu Items
+
+**NEW: Google Sheets Integration**
+
+The menu system now supports Google Sheets CSV integration. Menus are automatically fetched from Google Sheets every 5 minutes (300 seconds) with automatic fallback to JSON files if Sheets is unavailable.
+
+**Option 1: Update via Google Sheets (Recommended)**
+- Edit the published Google Sheets at the URLs configured in environment variables
+- Changes will appear on the site within 5 minutes
+- See `lib/menus/README.md` for CSV format details
+
+**Option 2: Update JSON Files (Fallback)**
 
 Edit `content/menu.food.json` or `content/menu.drinks.json`:
 ```json
