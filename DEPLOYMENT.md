@@ -137,7 +137,8 @@ Route (app)
    OAKS_TZ=America/Los_Angeles
    
    # Required for Google Calendar events integration (NEW)
-   OAKS_EVENTS_ICS_URL=https://calendar.google.com/calendar/ical/37d9dde590472fbab54c6be316817abf744850e509e6eb439df922649b87b38d%40group.calendar.google.com/public/basic.ics
+   # Use the calendar ICS URL provided by your calendar administrator
+   OAKS_EVENTS_ICS_URL=https://calendar.google.com/calendar/ical/YOUR_CALENDAR_ID%40group.calendar.google.com/public/basic.ics
    EVENTS_CACHE_TTL_MINUTES=15
    
    # Optional for contact form
