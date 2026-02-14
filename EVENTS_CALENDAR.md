@@ -20,7 +20,7 @@ The Events Calendar feature fetches events from a Google Calendar ICS feed and d
 Add the following environment variable to your `.env.local` file:
 
 ```bash
-OAKS_EVENTS_ICS_URL=https://calendar.google.com/calendar/ical/YOUR_CALENDAR_ID/public/basic.ics
+OAKS_EVENTS_ICS_URL=https://calendar.google.com/calendar/ical/YOUR_CALENDAR_ID%40group.calendar.google.com/public/basic.ics
 ```
 
 **To get your Google Calendar ICS URL:**
@@ -30,7 +30,17 @@ OAKS_EVENTS_ICS_URL=https://calendar.google.com/calendar/ical/YOUR_CALENDAR_ID/p
 3. Click "Settings and sharing"
 4. Scroll to "Integrate calendar"
 5. Copy the "Public URL in iCal format"
-6. URL encode any special characters (the provided example is already encoded)
+6. URL encode any special characters (@ becomes %40)
+
+**For Production Deployment:**
+Set the same environment variable in your hosting platform (Vercel, etc.):
+- Variable name: `OAKS_EVENTS_ICS_URL`
+- Value: Your calendar's ICS feed URL
+
+**Example format:**
+```
+https://calendar.google.com/calendar/ical/abc123def456%40group.calendar.google.com/public/basic.ics
+```
 
 ### 2. Make Your Calendar Public
 

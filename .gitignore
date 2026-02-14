@@ -28,6 +28,9 @@ yarn-error.log*
 .env*.local
 .env
 
+# production configuration files
+CALENDAR_PRODUCTION_CONFIG.md
+
 # vercel
 .vercel
 
