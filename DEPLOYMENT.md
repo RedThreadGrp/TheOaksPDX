@@ -133,6 +133,7 @@ Route (app)
    OAKS_FOOD_CSV_URL=https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6AerF_P9DPnZ9h0kOcOxs2V5HUFfBSacGc6uRd2bruCXjtJF9B0ZtwBi7SryMEmIRTjN7s3Cji4K2/pub?gid=0&single=true&output=csv
    OAKS_DRINKS_CSV_URL=https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6AerF_P9DPnZ9h0kOcOxs2V5HUFfBSacGc6uRd2bruCXjtJF9B0ZtwBi7SryMEmIRTjN7s3Cji4K2/pub?gid=1210313943&single=true&output=csv
    OAKS_SPECIALS_CSV_URL=https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6AerF_P9DPnZ9h0kOcOxs2V5HUFfBSacGc6uRd2bruCXjtJF9B0ZtwBi7SryMEmIRTjN7s3Cji4K2/pub?gid=272315194&single=true&output=csv
+   OAKS_TICKER_CSV_URL=https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6AerF_P9DPnZ9h0kOcOxs2V5HUFfBSacGc6uRd2bruCXjtJF9B0ZtwBi7SryMEmIRTjN7s3Cji4K2/pub?gid=478435834&single=true&output=csv
    OAKS_MENU_REVALIDATE_SECONDS=300
    OAKS_TZ=America/Los_Angeles
    
@@ -147,7 +148,7 @@ Route (app)
    NEXT_PUBLIC_SITE_URL=https://www.theoakspubpdx.com
    ```
    
-   **Note:** Menu and specials environment variables are required for Google Sheets integration. If not set, menus will fall back to hardcoded JSON files and specials will not be displayed. The events calendar URL is required to display upcoming events from Google Calendar on the Events page.
+   **Note:** Menu and specials environment variables are required for Google Sheets integration. If not set, menus will fall back to hardcoded JSON files and specials will not be displayed. The ticker URL (`OAKS_TICKER_CSV_URL`) is required to display ticker messages from the TickerItems tab; if not set, the ticker will display a fallback message. The events calendar URL is required to display upcoming events from Google Calendar on the Events page.
 
 4. **Deploy**
    - Click "Deploy"
@@ -278,6 +279,7 @@ The menu and specials system now supports Google Sheets CSV integration. Data is
 - **Food Menu**: Edit FoodItems tab (gid=0) in the published Google Sheets
 - **Drinks Menu**: Edit DrinkItems tab (gid=1210313943) in the published Google Sheets
 - **Specials**: Edit Specials tab (gid=272315194) in the published Google Sheets
+- **Ticker**: Edit TickerItems tab (gid=478435834) in the published Google Sheets
 - Changes will appear on the site within 5 minutes
 - See `lib/menus/README.md` for menu CSV format details
 - See `lib/specials/README.md` for specials CSV format details
