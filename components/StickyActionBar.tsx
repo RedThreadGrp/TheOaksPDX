@@ -1,14 +1,15 @@
 'use client';
 
 import { trackEvent } from '@/lib/analytics';
+import { hasOrdering, siteConfig, getOrderLabel } from '@/lib/siteConfig';
 import type { SiteConfig } from '@/lib/schemas';
 
 interface StickyActionBarProps {
   siteConfig: SiteConfig;
 }
 
-export default function StickyActionBar({ siteConfig }: StickyActionBarProps) {
-  const { phone, address, orderUrl } = siteConfig;
+export default function StickyActionBar({ siteConfig: siteCfg }: StickyActionBarProps) {
+  const { phone, address } = siteCfg;
 
   const handleCall = () => {
     trackEvent('cta_call_click');
@@ -19,14 +20,14 @@ export default function StickyActionBar({ siteConfig }: StickyActionBarProps) {
   };
 
   const handleOrder = () => {
-    trackEvent('cta_order_click');
+    trackEvent('order_click_stickybar');
   };
 
   const handleMenu = () => {
     trackEvent('cta_menu_click');
   };
 
-  const directionsUrl = siteConfig.googleMapsUrl || 
+  const directionsUrl = siteCfg.googleMapsUrl || 
     `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
       `${address.street}, ${address.city}, ${address.state} ${address.zip}`
     )}`;
@@ -72,10 +73,10 @@ export default function StickyActionBar({ siteConfig }: StickyActionBarProps) {
           <span className="text-xs mt-1 font-semibold text-cream">MENU</span>
         </a>
 
-        {/* Order or Email */}
-        {orderUrl ? (
+        {/* Order or Hours */}
+        {hasOrdering ? (
           <a
-            href={orderUrl}
+            href={siteConfig.orderOnlineUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleOrder}
@@ -88,13 +89,13 @@ export default function StickyActionBar({ siteConfig }: StickyActionBarProps) {
           </a>
         ) : (
           <a
-            href={`mailto:${siteConfig.email}`}
+            href="/contact"
             className="flex flex-col items-center justify-center py-4 hover:bg-warm-charcoal active:bg-warm-charcoal transition-colors"
           >
             <svg className="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span className="text-xs mt-1 font-semibold text-cream">EMAIL</span>
+            <span className="text-xs mt-1 font-semibold text-cream">HOURS</span>
           </a>
         )}
       </div>

@@ -1,4 +1,5 @@
 import { getSiteConfig } from '@/lib/content';
+import { hasOrdering, siteConfig as orderingConfig, getOrderLabel } from '@/lib/siteConfig';
 import ContactForm from './ContactForm';
 import { formatHours, formatDayName } from '@/lib/hours';
 import type { DayOfWeek } from '@/lib/hours';
@@ -81,6 +82,46 @@ export default function ContactPage() {
                   </div>
                 ))}
               </div>
+            </section>
+
+            {/* Online Ordering Section */}
+            <section className="mt-8 pt-8 border-t border-gray-200">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Online Ordering</h2>
+              {hasOrdering ? (
+                <div className="space-y-3">
+                  <p className="text-gray-700">
+                    Pickup ordering available online.
+                  </p>
+                  <p className="text-gray-700">
+                    For changes or special requests, please call us at{' '}
+                    <a href={`tel:${phone}`} className="text-primary-600 hover:text-primary-700 font-semibold">
+                      {phone}
+                    </a>
+                  </p>
+                  <div className="pt-2">
+                    <a
+                      href={orderingConfig.orderOnlineUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block px-6 py-3 bg-deep-green text-cream font-semibold rounded-lg hover:bg-oak-brown transition-colors"
+                    >
+                      {getOrderLabel()}
+                    </a>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <p className="text-gray-700">
+                    Pickup orders available by phone:
+                  </p>
+                  <a
+                    href={`tel:${phone}`}
+                    className="inline-block text-xl font-bold text-deep-green hover:text-oak-brown"
+                  >
+                    {phone}
+                  </a>
+                </div>
+              )}
             </section>
           </div>
 

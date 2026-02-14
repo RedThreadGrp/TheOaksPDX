@@ -9,7 +9,12 @@ export type EventName =
   | 'menu_filter_used'
   | 'contact_form_submit'
   | 'order_modal_open'
-  | 'order_platform_click';
+  | 'order_platform_click'
+  | 'order_click_header'
+  | 'order_click_hero'
+  | 'order_click_stickybar'
+  | 'order_click_menu_banner'
+  | 'order_click_drinks_banner';
 
 interface EventData {
   [key: string]: string | number | boolean;

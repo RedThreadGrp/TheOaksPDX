@@ -1,6 +1,7 @@
 import { getSiteConfig, getFoodMenu, getDrinksMenu, getEvents } from '@/lib/content';
 import OpenNowBadge from '@/components/OpenNowBadge';
 import CTAButton from '@/components/CTAButton';
+import OrderButton from '@/components/OrderButton';
 import { getTodayHours, formatHours } from '@/lib/hours';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -48,14 +49,10 @@ export default function HomePage() {
             <CTAButton href="/menu" variant="primary" className="w-full sm:w-auto">
               VIEW MENU
             </CTAButton>
+            <OrderButton source="hero" variant="outline" className="w-full sm:w-auto" />
             <CTAButton href={`https://maps.google.com/?q=${encodeURIComponent(siteConfig.address.street + ', ' + siteConfig.address.city)}`} variant="outline" className="w-full sm:w-auto">
               GET DIRECTIONS
             </CTAButton>
-            {siteConfig.orderUrl && (
-              <CTAButton href={siteConfig.orderUrl} variant="outline" className="w-full sm:w-auto">
-                ORDER ONLINE
-              </CTAButton>
-            )}
           </div>
         </div>
       </section>

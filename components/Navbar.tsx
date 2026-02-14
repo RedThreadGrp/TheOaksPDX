@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { getSiteConfig } from '@/lib/content';
+import { hasOrdering, siteConfig as orderingConfig, getOrderLabel } from '@/lib/siteConfig';
+import { trackEvent } from '@/lib/analytics';
 
 interface NavbarProps {
   siteConfig: ReturnType<typeof getSiteConfig>;
@@ -19,6 +21,10 @@ export default function Navbar({ siteConfig }: NavbarProps) {
     { href: '/contact', label: 'Contact' },
   ];
 
+  const handleOrderClick = () => {
+    trackEvent('order_click_header');
+  };
+
   return (
     <nav className="sticky top-0 z-50 bg-oak-brown/95 backdrop-blur-sm border-b border-gold/20">
       <div className="container mx-auto px-4">
@@ -30,6 +36,26 @@ export default function Navbar({ siteConfig }: NavbarProps) {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
+            {/* Order Link (conditionally displayed) */}
+            {hasOrdering ? (
+              <a
+                href={orderingConfig.orderOnlineUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleOrderClick}
+                className="text-gold hover:text-cream font-semibold transition-colors"
+              >
+                {getOrderLabel()}
+              </a>
+            ) : (
+              <a
+                href={`tel:${siteConfig.phone}`}
+                onClick={handleOrderClick}
+                className="text-gold hover:text-cream font-semibold transition-colors"
+              >
+                Call to Order
+              </a>
+            )}
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -62,6 +88,32 @@ export default function Navbar({ siteConfig }: NavbarProps) {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-gold/20">
+            {/* Order Link as first item in mobile menu */}
+            {hasOrdering ? (
+              <a
+                href={orderingConfig.orderOnlineUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  handleOrderClick();
+                  setMobileMenuOpen(false);
+                }}
+                className="block py-2 text-gold hover:text-cream font-semibold transition-colors"
+              >
+                {getOrderLabel()}
+              </a>
+            ) : (
+              <a
+                href={`tel:${siteConfig.phone}`}
+                onClick={() => {
+                  handleOrderClick();
+                  setMobileMenuOpen(false);
+                }}
+                className="block py-2 text-gold hover:text-cream font-semibold transition-colors"
+              >
+                Call to Order
+              </a>
+            )}
             {navLinks.map((link) => (
               <Link
                 key={link.href}
