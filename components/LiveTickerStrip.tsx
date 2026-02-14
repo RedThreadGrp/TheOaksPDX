@@ -1,10 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-
 export default function LiveTickerStrip() {
-  const tickerRef = useRef<HTMLDivElement>(null);
-
   // Duplicate content for seamless loop
   const tickerItems = [
     '🍺 Happy Hour Mon–Fri 3–6pm',
@@ -18,7 +14,6 @@ export default function LiveTickerStrip() {
   return (
     <div className="bg-warm-charcoal border-b border-gold/10 overflow-hidden h-10 flex items-center">
       <div 
-        ref={tickerRef}
         className="flex whitespace-nowrap animate-scroll"
         style={{
           animation: 'scroll 40s linear infinite',

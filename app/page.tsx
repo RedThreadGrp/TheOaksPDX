@@ -8,6 +8,13 @@ import SpecialsStrip from '@/components/specials/SpecialsStrip';
 import Link from 'next/link';
 import Image from 'next/image';
 
+// Google Reviews constants
+const GOOGLE_REVIEW_DATA = {
+  rating: '4.6',
+  count: '100+',
+  featuredReview: '"Great neighborhood spot with excellent food and friendly service. Love the atmosphere!"',
+};
+
 export default async function HomePage() {
   const siteConfig = getSiteConfig();
   const todayHours = getTodayHours(siteConfig.hours);
@@ -203,7 +210,7 @@ export default async function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-cream p-6 rounded-lg">
                 <div className="text-gold mb-2">★★★★★</div>
-                <p className="text-gray-700 italic mb-3">"Great neighborhood spot with excellent food and friendly service. Love the atmosphere!"</p>
+                <p className="text-gray-700 italic mb-3">{GOOGLE_REVIEW_DATA.featuredReview}</p>
                 <p className="text-sm text-gray-500">- Google Review</p>
               </div>
               <div className="bg-cream p-6 rounded-lg">
