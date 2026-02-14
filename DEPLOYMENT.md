@@ -136,13 +136,17 @@ Route (app)
    OAKS_MENU_REVALIDATE_SECONDS=300
    OAKS_TZ=America/Los_Angeles
    
+   # Required for Google Calendar events integration (NEW)
+   OAKS_EVENTS_ICS_URL=https://calendar.google.com/calendar/ical/37d9dde590472fbab54c6be316817abf744850e509e6eb439df922649b87b38d%40group.calendar.google.com/public/basic.ics
+   EVENTS_CACHE_TTL_MINUTES=15
+   
    # Optional for contact form
    RESEND_API_KEY=your_api_key_here
    CONTACT_TO_EMAIL=info@theoakspubpdx.com
    NEXT_PUBLIC_SITE_URL=https://www.theoakspubpdx.com
    ```
    
-   **Note:** Menu and specials environment variables are required for Google Sheets integration. If not set, menus will fall back to hardcoded JSON files and specials will not be displayed.
+   **Note:** Menu and specials environment variables are required for Google Sheets integration. If not set, menus will fall back to hardcoded JSON files and specials will not be displayed. The events calendar URL is required to display upcoming events from Google Calendar on the Events page.
 
 4. **Deploy**
    - Click "Deploy"
