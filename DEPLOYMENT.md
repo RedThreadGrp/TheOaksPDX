@@ -129,10 +129,12 @@ Route (app)
 
 3. **Set Environment Variables**
    ```
-   # Required for menu integration (NEW)
+   # Required for menu and specials integration (NEW)
    OAKS_FOOD_CSV_URL=https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6AerF_P9DPnZ9h0kOcOxs2V5HUFfBSacGc6uRd2bruCXjtJF9B0ZtwBi7SryMEmIRTjN7s3Cji4K2/pub?gid=0&single=true&output=csv
    OAKS_DRINKS_CSV_URL=https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6AerF_P9DPnZ9h0kOcOxs2V5HUFfBSacGc6uRd2bruCXjtJF9B0ZtwBi7SryMEmIRTjN7s3Cji4K2/pub?gid=1210313943&single=true&output=csv
+   OAKS_SPECIALS_CSV_URL=https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6AerF_P9DPnZ9h0kOcOxs2V5HUFfBSacGc6uRd2bruCXjtJF9B0ZtwBi7SryMEmIRTjN7s3Cji4K2/pub?gid=272315194&single=true&output=csv
    OAKS_MENU_REVALIDATE_SECONDS=300
+   OAKS_TZ=America/Los_Angeles
    
    # Optional for contact form
    RESEND_API_KEY=your_api_key_here
@@ -140,7 +142,7 @@ Route (app)
    NEXT_PUBLIC_SITE_URL=https://www.theoakspubpdx.com
    ```
    
-   **Note:** Menu environment variables are required for Google Sheets integration. If not set, the system will fall back to hardcoded JSON menus.
+   **Note:** Menu and specials environment variables are required for Google Sheets integration. If not set, menus will fall back to hardcoded JSON files and specials will not be displayed.
 
 4. **Deploy**
    - Click "Deploy"
@@ -261,18 +263,21 @@ Edit `content/site.json`:
 }
 ```
 
-### Adding Menu Items
+### Adding Menu Items and Specials
 
 **NEW: Google Sheets Integration**
 
-The menu system now supports Google Sheets CSV integration. Menus are automatically fetched from Google Sheets every 5 minutes (300 seconds) with automatic fallback to JSON files if Sheets is unavailable.
+The menu and specials system now supports Google Sheets CSV integration. Data is automatically fetched from Google Sheets every 5 minutes (300 seconds) with automatic fallback to JSON files (menus only) if Sheets is unavailable.
 
 **Option 1: Update via Google Sheets (Recommended)**
-- Edit the published Google Sheets at the URLs configured in environment variables
+- **Food Menu**: Edit FoodItems tab (gid=0) in the published Google Sheets
+- **Drinks Menu**: Edit DrinkItems tab (gid=1210313943) in the published Google Sheets
+- **Specials**: Edit Specials tab (gid=272315194) in the published Google Sheets
 - Changes will appear on the site within 5 minutes
-- See `lib/menus/README.md` for CSV format details
+- See `lib/menus/README.md` for menu CSV format details
+- See `lib/specials/README.md` for specials CSV format details
 
-**Option 2: Update JSON Files (Fallback)**
+**Option 2: Update JSON Files (Fallback for Menus Only)**
 
 Edit `content/menu.food.json` or `content/menu.drinks.json`:
 ```json

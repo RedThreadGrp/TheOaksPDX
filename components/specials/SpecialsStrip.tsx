@@ -58,8 +58,8 @@ interface SpecialCardProps {
 }
 
 function SpecialCard({ special }: SpecialCardProps) {
-  // Truncate description to ~140 characters
-  const truncateDescription = (text: string | undefined, maxLength: number = 140) => {
+  // Truncate description to approximately 160 characters
+  const truncateDescription = (text: string | undefined, maxLength: number = 160) => {
     if (!text) return '';
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength).trim() + '...';

@@ -22,6 +22,9 @@ export type SpecialsData = {
   specials: Special[];
 };
 
+// Valid special types (single source of truth)
+const VALID_SPECIAL_TYPES: Special['type'][] = ['food', 'drinks', 'event', 'happyhour', 'other'];
+
 // CSV column interface
 interface SpecialCSVRow {
   Id: string;
@@ -58,8 +61,7 @@ function parseOrder(value: string): number {
 function parseType(value: string): Special['type'] {
   if (!value) return 'other';
   const normalized = value.trim().toLowerCase();
-  const validTypes: Special['type'][] = ['food', 'drinks', 'event', 'happyhour', 'other'];
-  return validTypes.includes(normalized as Special['type']) 
+  return VALID_SPECIAL_TYPES.includes(normalized as Special['type']) 
     ? (normalized as Special['type']) 
     : 'other';
 }
