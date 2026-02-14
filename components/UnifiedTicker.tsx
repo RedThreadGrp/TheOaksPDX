@@ -7,24 +7,24 @@ interface TickerItem {
 }
 
 interface UnifiedTickerProps {
-  specialsItems: TickerItem[];
+  tickerItems: TickerItem[];
   nextEventItem: TickerItem | null;
 }
 
-export default function UnifiedTicker({ specialsItems, nextEventItem }: UnifiedTickerProps) {
-  // Combine specials and next event
-  const allItems = [...specialsItems];
+export default function UnifiedTicker({ tickerItems, nextEventItem }: UnifiedTickerProps) {
+  // Combine ticker messages and next event
+  const allItems = [...tickerItems];
   if (nextEventItem) {
     allItems.push(nextEventItem);
   }
 
   // If no items, show a default message
-  const tickerItems = allItems.length > 0 
+  const displayItems = allItems.length > 0 
     ? allItems 
     : [{ id: 'default', text: 'Check Events for What\'s Happening', emoji: '🎉' }];
 
   // Create doubled content for seamless scrolling
-  const doubledItems = [...tickerItems, ...tickerItems];
+  const doubledItems = [...displayItems, ...displayItems];
 
   return (
     <div className="bg-warm-charcoal border-b border-gold/10 overflow-hidden h-10 flex items-center">

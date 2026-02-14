@@ -79,7 +79,7 @@ export default async function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <UnifiedTicker 
-          specialsItems={tickerData.specialsItems}
+          tickerItems={tickerData.tickerItems}
           nextEventItem={tickerData.nextEventItem}
         />
         <Navbar siteConfig={siteConfig} />
