@@ -1,4 +1,4 @@
-import { getFoodMenu } from '@/lib/content';
+import { getFoodMenuFromSheets } from '@/lib/menus/sheetsCsv';
 import MenuPageClient from './MenuPageClient';
 import type { Metadata } from 'next';
 
@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'View our full food menu featuring pub favorites, appetizers, entrees, and more.',
 };
 
-export default function MenuPage() {
-  const menu = getFoodMenu();
+export default async function MenuPage() {
+  const menu = await getFoodMenuFromSheets();
   return <MenuPageClient menu={menu} />;
 }
