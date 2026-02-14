@@ -24,8 +24,8 @@ async function fetchAndParseICS(): Promise<ParsedEvent[]> {
   }
 
   const icsUrl = process.env.OAKS_EVENTS_ICS_URL;
-  if (!icsUrl) {
-    throw new Error('OAKS_EVENTS_ICS_URL environment variable is not configured');
+  if (!icsUrl || icsUrl.includes('YOUR_CALENDAR_ID')) {
+    throw new Error('Events calendar is not yet configured. Please check back later.');
   }
 
   console.log('Fetching fresh ICS data from:', icsUrl);
@@ -60,6 +60,13 @@ async function fetchAndParseICS(): Promise<ParsedEvent[]> {
     if (cachedData) {
       console.log('Returning stale cached data as fallback');
       return cachedData.events;
+    }
+
+    // Provide more helpful error messages
+    if (error instanceof Error) {
+      if (error.message.includes('ENOTFOUND') || error.message.includes('getaddrinfo')) {
+        throw new Error('Unable to connect to events calendar. Please check back later.');
+      }
     }
 
     throw error;
