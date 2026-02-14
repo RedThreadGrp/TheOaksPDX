@@ -204,9 +204,35 @@ CONTACT_TO_EMAIL=info@theoakspubpdx.com
 
 # Site URL (used for sitemap and schema)
 NEXT_PUBLIC_SITE_URL=https://www.theoakspubpdx.com
+
+# Online Ordering Configuration (Union POS)
+# To enable online ordering, set the ordering URL
+OAKS_ORDER_ONLINE_URL=https://order.unionpos.com/your-restaurant
+# Order mode: pickup | delivery | both (default: pickup)
+OAKS_ORDER_MODE=pickup
+# Custom label for order buttons (optional, defaults based on mode)
+OAKS_ORDER_LABEL=Order Pickup
 ```
 
 **Note:** Without `RESEND_API_KEY`, contact form submissions will be logged to the console but not emailed.
+
+### Online Ordering Setup
+
+The site supports online ordering integration with Union POS or similar external ordering platforms:
+
+1. **Enable Ordering**: Set `OAKS_ORDER_ONLINE_URL` in Vercel or `.env.local`
+2. **Choose Mode**: Set `OAKS_ORDER_MODE` to `pickup` (default), `delivery`, or `both`
+3. **Customize Label**: Optionally set `OAKS_ORDER_LABEL` to override the default button text
+
+**Without ordering URL configured:**
+- Order buttons display "Call to Order" and link to phone number
+- Sticky action bar shows "Hours" instead of "Order" button
+- Menu banners show phone number for ordering
+
+**With ordering URL configured:**
+- Order buttons appear in header, hero, menu pages, and sticky bar
+- All order links open in new tab
+- Analytics tracks order clicks by source
 
 ## ✨ Features
 
