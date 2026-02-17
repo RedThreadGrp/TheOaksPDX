@@ -187,5 +187,5 @@ Without the environment variable, you'll see the fallback message in the ticker.
 
 - `components/UnifiedTicker.tsx` - Client component that displays the ticker
 - `app/layout.tsx` - Root layout that includes the ticker
-- `TICKER_FIX.md` - Documentation about the ticker fix
-- `TICKER_VERIFICATION.md` - Verification report
+- `docs/archive/TICKER_FIX.md` - Documentation about the ticker fix (archived)
+- `docs/archive/TICKER_VERIFICATION.md` - Verification report (archived)
